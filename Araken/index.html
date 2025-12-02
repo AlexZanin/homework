@@ -1,16 +1,885 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сайт про кота ">
-    <meta name="keywords" content="кот, толстый, котячий">
-    <title>Sergei Zpizding</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <meta name="description" content="Официальный сайт Сергея Котаныча - самого харизматичного кота в сети">
+    <meta name="keywords" content="кот, Котаныч, Сергей, пушистый, мурлыка, кошачий, котоблог">
+    <title>Капо | Официальный сайт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --accent-color: #FFD166;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1514888286974-6d03bde4ba4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-btns {
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        /* Main content */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: var(--gradient);
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .cat-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s;
+        }
+
+        .cat-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .cat-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .cat-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Stats section */
+        .stats {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            border-radius: 40px;
+            margin: 50px 0;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Gallery section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Contact section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) rotate(10deg);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+        }
+
+        /* Cat facts */
+        .cat-fact {
+            background: var(--accent-color);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .cat-fact i {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: var(--dark-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 209, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 209, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 209, 102, 0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--gradient);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s;
+                z-index: 999;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                max-width: 250px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 70px 0;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>КотаныЧ</h1>
-    <img src="test.jpeg" width="900" alt="фото котаныча">
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                Котаныч
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О Котаныче</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Капо Потучность</h1>
+            <p>Самый харизматичный кот в сети. Профессиональный мурлыка, эксперт по сну и дегустатор кормов
+                премиум-класса.</p>
+            <div class="hero-btns">
+                <a href="#about" class="btn">Узнать больше</a>
+                <a href="#contact" class="btn btn-outline">Связаться с агентом</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">О Капо Потучности</h2>
+            <div class="about-content">
+                <div class="cat-image">
+                    <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                        alt="Сергей Котаныч в своем любимом кресле">
+                </div>
+                <div class="about-text">
+                    <h3>Привет, я Капо!</h3>
+                    <p>Я — кот исключительной породы и невероятной харизмы. Моя жизнь наполнена приключениями, вкусной
+                        едой и долгим сном в самых комфортных местах дома.</p>
+                    <p>У меня более 5 лет опыта в области мурлыкания, ловли солнечных зайчиков и создания уюта в любом
+                        помещении. Мой профиль включает в себя экспертизу в следующих областях:</p>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li>Дегустация кормов премиум-класса</li>
+                        <li>Тестирование мягкости диванов и кресел</li>
+                        <li>Проведение релакс-сессий с мурлыканием</li>
+                        <li>Охранная деятельность (отпугивание мышей и голубей)</li>
+                    </ul>
+                    <p>В свободное время я люблю наблюдать за птицами из окна, играть с мячиком и принимать солнечные
+                        ванны.</p>
+                </div>
+            </div>
+
+            <!-- Cat fact -->
+            <div class="cat-fact">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <strong>Факт о Капо:</strong> Капо может мурлыкать на 5 разных тональностях, в зависимости от
+                    настроения и степени удовольствия.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" id="yearsExp">5+</div>
+                    <div class="stat-label">Лет опыта</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="happyOwners">120+</div>
+                    <div class="stat-label">Довольных подписчиков</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="napsDaily">18</div>
+                    <div class="stat-label">Снов в день</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="toysTested">50+</div>
+                    <div class="stat-label">Протестированных игрушек</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Галерея Потучности</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Запечатленные моменты из жизни самого
+                харизматичного кота</p>
+
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Котаныч в костюме">
+                    <div class="gallery-overlay">
+                        <h3>В костюме на празднике</h3>
+                        <p>Новый год, 2022</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w-600&q=80"
+                        alt="Котаныч спит">
+                    <div class="gallery-overlay">
+                        <h3>Послеобеденный сон</h3>
+                        <p>Любимое занятие</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Котаныч смотрит в камеру">
+                    <div class="gallery-overlay">
+                        <h3>Прямой взгляд в камеру</h3>
+                        <p>Фотосессия 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с агентом Котаныча</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <strong>Агент:</strong> Алексей
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Телефон:</strong> +7 (999) 123-45-67
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email:</strong> agent@kotanych.ru
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Адрес:</strong> г. Пермь, ул. Кошачья, д. 15
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Отправьте сообщение</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" class="form-control" placeholder="Иван Иванов" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="email" id="email" class="form-control" placeholder="ivan@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" class="form-control" rows="5"
+                                placeholder="Расскажите, по какому вопросу хотите связаться с Котанычем..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                    Котаныч
+                </div>
+                <div>
+                    <p>Официальный сайт самого харизматичного кота в сети</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Капо Потучность. Все права защищены. Любое копирование материалов только с разрешения
+                агента.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '0.5rem 0';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '1rem 0';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animate stats counter
+        function animateCounter(elementId, targetValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            let startValue = 0;
+            const increment = targetValue / (duration / 16); // 60fps
+
+            function updateCounter() {
+                startValue += increment;
+                if (startValue < targetValue) {
+                    element.textContent = Math.floor(startValue) + (elementId === 'napsDaily' ? '' : '+');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = targetValue + (elementId === 'napsDaily' ? '' : '+');
+                }
+            }
+
+            // Start animation when element is in viewport
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    updateCounter();
+                    observer.disconnect();
+                }
+            }, { threshold: 0.5 });
+
+            observer.observe(element);
+        }
+
+        // Initialize counters
+        document.addEventListener('DOMContentLoaded', () => {
+            animateCounter('yearsExp', 5);
+            animateCounter('happyOwners', 120);
+            animateCounter('napsDaily', 18);
+            animateCounter('toysTested', 50);
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+
+                    // In a real application, you would send this data to a server
+                    // For demonstration, we'll just show an alert
+                    alert(`Спасибо, ${name}! Ваше сообщение отправлено агенту Котаныча. Мы свяжемся с вами в ближайшее время по email: ${email}`);
+
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+            }
+        });
+    </script>
 </body>
+
 </html>
